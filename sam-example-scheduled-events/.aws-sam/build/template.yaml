@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: sam-example-scheduled-events
+Transform:
+- AWS::Serverless-2016-10-31
+Resources:
+  exampleScheduledEventsLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs12.x
+      Handler: src/handlers/index.handler
+      Timeout: 10
+      Events:
+        RateSchedule:
+          Properties:
+            Description: demo scheduled events
+            Enabled: false
+            Name: schedule-1
+            Schedule: rate(3 minutes)
+          Type: Schedule
+      CodeUri: exampleScheduledEventsLambdaFunction
